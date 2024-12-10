@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кросворд: Подолай Морок</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('dark_forest.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            transition: background 0.5s;
+        }
+        #message {
+            margin: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        #crossword {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 2px solid white;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+        .cell input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            color: white;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+        #submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: #ffa500;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #submit-btn:hover {
+            background: #ff7700;
+        }
+        .light {
+            background: url('light_meadow.jpg') no-repeat center center;
+            background-size: cover;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Кросворд: Подолай Морок</h1>
+    <div id="message">Заповніть кросворд:</div>
+    <div id="crossword">
+        <!-- Row 1 -->
+        <div class="cell"><input type="text" maxlength="1" data-answer="с"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="в"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="і"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="т"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="л"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="о"></div>
+        <!-- Row 2 -->
+        <div class="cell"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="п"></div>
+        <div class="cell"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="р"></div>
+        <div class="cell"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="в"></div>
+        <div class="cell"></div>
+        <!-- Row 3 -->
+        <div class="cell"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="р"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="а"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="в"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="д"></div>
+        <div class="cell"><input type="text" maxlength="1" data-answer="а"></div>
+        <div class="cell"></div>
+    </div>
+    <button id="submit-btn">Вперед!</button>
+
+    <script>
+        const submitBtn = document.getElementById('submit-btn');
+        const cells = document.querySelectorAll('.cell input');
+        const message = document.getElementById('message');
+
+        submitBtn.addEventListener('click', () => {
+            let isCorrect = true;
+            cells.forEach(cell => {
+                const answer = cell.getAttribute('data-answer');
+                if (cell.value.toLowerCase() !== answer) {
+                    isCorrect = false;
+                }
+            });
+
+            if (isCorrect) {
+                document.body.classList.add('light');
+                message.textContent = "Ви знайшли правильні відповіді!";
+            } else {
+                message.textContent = "Дещо неправильно... Спробуйте ще раз.";
+            }
+        });
+    </script>
+</body>
+</html>
